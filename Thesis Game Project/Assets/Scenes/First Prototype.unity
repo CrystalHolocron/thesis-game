@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rotationSpeed: 720
+  jumpSpeed: 5
 --- !u!143 &190229807
 CharacterController:
   m_ObjectHideFlags: 0
@@ -897,7 +898,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.332694, y: 1}
+    m_SensorSize: {x: 2.3333333, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
