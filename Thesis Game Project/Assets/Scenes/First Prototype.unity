@@ -235,10 +235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e12897a795f6f40b5f6391bb1abee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 7.5
   rotationSpeed: 720
-  jumpSpeed: 5
+  jumpSpeed: 7.5
   jumpButtonGracePeriod: 0.2
+  gravitySpeed: 2
 --- !u!143 &190229807
 CharacterController:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed;
     public float jumpSpeed;
     public float jumpButtonGracePeriod;
+    public float gravitySpeed;
 
     private CharacterController characterController;
     private float ySpeed;
@@ -32,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * movementSpeed; // Ensures less movement if joystick is not fully tilted
         movementDirection.Normalize(); // Locks movementDirection vector to 1 so diagonal movement isn't faster than ordinal movement
 
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        ySpeed += Physics.gravity.y * gravitySpeed * Time.deltaTime;
 
         if (characterController.isGrounded)
         {
