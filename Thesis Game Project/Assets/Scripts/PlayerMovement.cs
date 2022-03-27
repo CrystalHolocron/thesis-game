@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpButtonGracePeriod;
     public float gravitySpeed;
 
+    private Animator animator;
     private CharacterController characterController;
     private float ySpeed;
     private float originalStepOffset;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         originalStepOffset = characterController.stepOffset;
     }
@@ -80,12 +82,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementDirection != Vector3.zero)
         {
+            animator.SetBool("isMoving", true);
             // transform.forward = movementDirection; // instantly snaps character to face movementDirection
 
             Quaternion toRotate = Quaternion.LookRotation(movementDirection, Vector3.up);
-            toRotate *= Quaternion.Euler(0, -90, 0); // Adds a -90/270 degree Y rotation to account for incorrect toRotate angle
+            //toRotate *= Quaternion.Euler(0, -90, 0); // Added a -90 Y rotation to fix incorrect toRotate angle; fixed now
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
     }
 }
