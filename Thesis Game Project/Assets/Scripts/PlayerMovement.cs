@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpButtonGracePeriod;
     public float gravitySpeed;
 
+    [SerializeField]
+    private Transform cameraTransform;
+
     private Animator animator;
     private CharacterController characterController;
     private float ySpeed;
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * movementSpeed; // Ensures less movement if joystick is not fully tilted
+        movementDirection = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movementDirection;
         movementDirection.Normalize(); // Locks movementDirection vector to 1 so diagonal movement isn't faster than ordinal movement
 
         ySpeed += Physics.gravity.y * gravitySpeed * Time.deltaTime;
@@ -93,6 +97,18 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("isMoving", false);
+        }
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
